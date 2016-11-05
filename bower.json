@@ -1,0 +1,26 @@
+{
+  "name": "kwc-slides",
+  "version": "1.0.0",
+  "description": "Slides system as webcomponent",
+  "license": "MIT",
+  "main": "kwc-slides.html",
+  "keywords": [
+    "polymer",
+    "web-component",
+    "slides"
+  ],
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "node_modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "homepage": "https://github.com/successk/kwc-slides",
+  "authors": [
+    "Gaëtan Rizio <gaetan@rizio.fr>"
+  ]
+}
