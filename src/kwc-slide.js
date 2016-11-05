@@ -10,6 +10,10 @@
           type: String,
           value: null
         },
+        goto: {
+          type: String,
+          value: null
+        },
         width: {
           type: Number,
           value: null,
@@ -76,6 +80,10 @@
         styles.push(`background-image:url(${background})`);
         styles.push("background-size:100% 100%");
       }
+    }
+
+    get hasGotoLink() {
+      return this.goto && this.goto.trim() !== "";
     }
   }
 

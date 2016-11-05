@@ -19,7 +19,11 @@
           type: Boolean,
           value: false
         },
-        partRelated: {
+        enableGotoButton: {
+          type: Boolean,
+          value: false
+        },
+        showGotoButton: {
           type: Boolean,
           value: false
         },
@@ -71,7 +75,7 @@
         "previous.tap": "_previousTap",
         "next.tap": "_nextTap",
         "fullscreen.tap": "_fullscreenTap",
-        "related.tap": "_partRelatedTap",
+        "gotoButton.tap": "_gotoButtonTap",
         "inputSlideIndex.input": "_inputSlideIndexInput"
       };
     }
@@ -84,12 +88,6 @@
     }
 
     attachedCallback() {
-      if (this.start) {
-        this.slide = this.start;
-      } else {
-        this.slide = this.querySelector("kwc-slide").name;
-      }
-
       this.addEventListener("keydown", (e) => {
         if (!e.target || !e.target.hasAttribute("id") || e.target.getAttribute("id") !== "inputSlideIndex") {
           if (e.keyCode === 33) {
@@ -122,6 +120,7 @@
       this._updateTitlesOnMasks();
 
       setTimeout(() => {
+        // Go out of flow
         const slides = this.querySelectorAll("kwc-slide");
         const masks = Array.from(this.querySelectorAll("kwc-slide-mask"));
         const masksHeight = masks.length > 0 ? masks.map(m => m.offsetHeight).reduce((acc, height) => acc + height) : 0;
@@ -131,6 +130,11 @@
           slide.setAttribute("width", this.width);
           slide.setAttribute("height", this.height - masksHeight);
         });
+        if (this.start) {
+          this.slide = this.start;
+        } else {
+          this.slide = this.querySelector("kwc-slide").name;
+        }
       }, 1);
     }
 
@@ -248,13 +252,20 @@
       this._next();
     }
 
-    _partRelatedTap(e) {
+    _gotoButtonTap(e) {
       e.preventDefault();
       this._exitFullScreen().then(() => {
-        // We wait the end off full screen exit, otherwise the browser does not trigger "go to hash" action.
-        // We remove current hash and reset it to force "go to hash" action.
-        window.location.hash = "#";
-        window.location.hash = `#${this._currentSlide.getAttribute("part")}`;
+        if (this._currentSlide.hasGotoLink) {
+          const goto = this._currentSlide.goto;
+          if (goto.startsWith("#")) {
+            // We wait the end off full screen exit, otherwise the browser does not trigger "go to hash" action.
+            // We remove current hash and reset it to force "go to hash" action.
+            window.location.hash = "#";
+            window.location.hash = goto;
+          } else {
+            window.location.href = goto;
+          }
+        }
       });
     }
 
@@ -409,7 +420,7 @@
           slide.show = false;
         }
       });
-      this.partRelated = this._currentSlide && this._currentSlide.hasAttribute("part");
+      this.enableGotoButton = this._currentSlide && this._currentSlide.hasGotoLink;
       this._updateTitlesOnMasks();
     }
 

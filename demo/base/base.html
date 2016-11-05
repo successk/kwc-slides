@@ -13,12 +13,16 @@
     .text-center {
       text-align: center;
     }
+
+    #anchor {
+      margin-top: 100vh;
+    }
   </style>
 </head>
 
 <body>
   <div class="example">
-    <kwc-slides start="welcome" background="background.png" full-background="#000" hide-slide-number>
+    <kwc-slides start="welcome" background="background.png" full-background="#000" hide-slide-number show-goto-button>
       <kwc-slide-mask location="top" breadcrumb-separator=" &gt; ">
         <template>
           <div class="text-center">
@@ -36,14 +40,14 @@
           </div>
         </template>
       </kwc-slide-mask>
-      <kwc-slide name="welcome" type="title-subtitle" next="part1" h1="_none_">
+      <kwc-slide name="welcome" type="title-subtitle" next="part1" h1="_none_" goto="https://github.com/successk/kwc-slides">
         <h1>The article Web Component</h1>
         <p>
           <strong>Kwc</strong> released a new web component: <code>kwc-article</code>.
           But what is this web component and for what purpose?
         </p>
       </kwc-slide>
-      <kwc-slide name="part1" type="title-content" previous="welcome" part="lorem-ipsum" h1="Part 1">
+      <kwc-slide name="part1" type="title-content" previous="welcome" h1="Part 1" goto="#anchor">
         <h3>What is <code>kwc-article</code>?</h3>
         <p>
           <code>kwc-article</code> is a super web component to make wonderful articles.
@@ -113,6 +117,12 @@
       </kwc-slide>
     </kwc-slides>
   </div>
+
+  <h1 id="anchor">Some anchor in the page (#anchor)</h1>
+
+  <p>
+    This (hidden) part is accessible through an anchor (#anchor).
+  </p>
 </body>
 
 </html>
