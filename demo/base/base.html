@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>&lt;kwc-slides&gt;</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+
+  <link rel="import" href="../../kwc-slides/kwc-slides.html">
+
+  <style>
+    .text-center {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="example">
+    <kwc-slides start="welcome" background="background.png" full-background="#000" hide-slide-number>
+      <kwc-slide-mask location="top" breadcrumb-separator=" &gt; ">
+        <template>
+          <div class="text-center">
+            The article Web Component
+            <template is="dom-if" if="[[kwc-has-breadcrumb]]">
+              — [[kwc-breadcrumb]]
+            </template>
+          </div>
+        </template>
+      </kwc-slide-mask>
+      <kwc-slide-mask location="bottom">
+        <template>
+          <div class="text-center">
+            [[kwc-slide]] / [[kwc-slides-count]]
+          </div>
+        </template>
+      </kwc-slide-mask>
+      <kwc-slide name="welcome" type="title-subtitle" next="part1" h1="_none_">
+        <h1>The article Web Component</h1>
+        <p>
+          <strong>Kwc</strong> released a new web component: <code>kwc-article</code>.
+          But what is this web component and for what purpose?
+        </p>
+      </kwc-slide>
+      <kwc-slide name="part1" type="title-content" previous="welcome" part="lorem-ipsum" h1="Part 1">
+        <h3>What is <code>kwc-article</code>?</h3>
+        <p>
+          <code>kwc-article</code> is a super web component to make wonderful articles.
+        </p>
+      </kwc-slide>
+      <kwc-slide name="part2" type="title-content" h1="Part 2">
+        <h3>And for what purpose?</h3>
+        <p>
+          Bind your article with a slide system.
+        </p>
+      </kwc-slide>
+      <kwc-slide name="part3" type="title" h2="Part 21">
+        <h2>There is only a title!</h2>
+      </kwc-slide>
+      <kwc-slide name="part4" type="figure" h2="Part 22">
+        <figure>
+          <img src="big-image-width.png" alt="Big image, resized">
+          <figcaption>Big image, resized</figcaption>
+        </figure>
+      </kwc-slide>
+      <kwc-slide name="part4-1" type="figure">
+        <figure>
+          <img src="big-image-height.png" alt="Big image by height, resized">
+          <figcaption>Big image by height, resized</figcaption>
+        </figure>
+      </kwc-slide>
+      <kwc-slide name="part5" type="title-list" h1="Part 3" h2="Part 31">
+        <h3>My title</h3>
+        <ul>
+          <li>My</li>
+          <li>List</li>
+          <li>Items</li>
+          <li>With a big item here</li>
+        </ul>
+      </kwc-slide>
+      <kwc-slide name="part6" type="title-list">
+        <h3>My title</h3>
+        <ol>
+          <li>My</li>
+          <li>List</li>
+          <li>Items</li>
+          <li>With a big item here</li>
+        </ol>
+      </kwc-slide>
+      <kwc-slide name="part7" type="title-content-image-left" h2="Part 32" h3="Part 321">
+        <h3>Title + content + image</h3>
+        <p>There is an image on the left</p>
+        <figure>
+          <img src="big-image-width.png" alt="Big image, resized">
+        </figure>
+      </kwc-slide>
+      <kwc-slide name="part8" type="title-content-image-right" h3="Part 322">
+        <h3>Title + content + image</h3>
+        <p>There is an image on the right</p>
+        <figure>
+          <img src="big-image-height-thin.png" alt="Big image, resized">
+          <figcaption>Big image, resized</figcaption>
+        </figure>
+      </kwc-slide>
+      <kwc-slide name="part9" type="title-content" background="#9999ff" h1="_none_">
+        <h3>Super background!</h3>
+        <p>You can add a background on a slide too</p>
+      </kwc-slide>
+      <kwc-slide name="part10" type="title-content" background="rgba(153, 153, 255, 0.5)">
+        <h3>Super background!</h3>
+        <p>Play with transparency if you need to show main background</p>
+      </kwc-slide>
+    </kwc-slides>
+  </div>
+</body>
+
+</html>

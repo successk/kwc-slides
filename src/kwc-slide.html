@@ -1,0 +1,190 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="kwc-slide">
+  <template>
+    <style>
+      :host, :host #slide {
+        display: flex;
+        width: 100%;
+        flex-grow: 1;
+      }
+
+      :host:not([show]) {
+        display: none;
+      }
+
+      .slide {
+        width: 100%;
+        height: 100%;
+      }
+
+      .title-subtitle {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .title-subtitle ::content h1 {
+        font-size: 3rem;
+      }
+
+      .title-subtitle ::content p {
+        font-size: 2rem;
+      }
+
+      .title-content {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .title-content ::content h3 {
+        font-size: 2rem;
+      }
+
+      .title-content ::content p {
+        font-size: 1.5rem;
+      }
+
+      .title {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .title ::content h2 {
+        font-size: 3rem;
+      }
+
+      .figure {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .figure ::content figure {
+        margin: 0;
+        padding: 0;
+      }
+
+      .figure ::content figure img {
+        max-width: 100%;
+      }
+
+      .title-list {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .title-list ::content ul, .title-list ::content ol {
+        text-align: left;
+      }
+
+      .title-content-image-left, .title-content-image-right {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .title-content-image-left ::content h3, .title-content-image-right ::content h3 {
+        font-size: 2rem;
+      }
+
+      .title-content-image-left ::content p, .title-content-image-right ::content p {
+        font-size: 1.5rem;
+      }
+
+      .title-content-image-left ::content figure, .title-content-image-right ::content figure {
+        margin: 0;
+        padding: 0;
+      }
+
+      .title-content-image-left ::content figure img, .title-content-image-right ::content figure img {
+        max-width: 100%;
+      }
+
+      .kwc-slide-left, .kwc-slide-right {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+      }
+    </style>
+
+    <div id="slide" style="[[styleSlide]]">
+      <template is="dom-if" if="[[isType(type, 'title-subtitle')]]">
+        <div class="slide title-subtitle">
+          <content select="h1"></content>
+          <content select="p"></content>
+        </div>
+      </template>
+
+      <template is="dom-if" if="[[isType(type, 'title-content')]]">
+        <div class="slide title-content">
+          <content select="h3"></content>
+          <content select="p"></content>
+        </div>
+      </template>
+
+      <template is="dom-if" if="[[isType(type, 'title')]]">
+        <div class="slide title">
+          <content select="h2"></content>
+        </div>
+      </template>
+
+      <template is="dom-if" if="[[isType(type, 'figure')]]">
+        <div class="slide figure">
+          <content select="figure"></content>
+        </div>
+      </template>
+
+      <template is="dom-if" if="[[isType(type, 'title-list')]]">
+        <div class="slide title-list">
+          <content select="h3"></content>
+          <content select="ul,ol"></content>
+        </div>
+      </template>
+
+      <template is="dom-if" if="[[isType(type, 'title-content-image-right')]]">
+        <div class="slide title-content-image-right">
+          <div class="kwc-slide-left">
+            <content select="h3"></content>
+            <content select="p"></content>
+          </div>
+          <div class="kwc-slide-right">
+            <content select="figure"></content>
+          </div>
+        </div>
+      </template>
+
+      <template is="dom-if" if="[[isType(type, 'title-content-image-left')]]">
+        <div class="slide title-content-image-left">
+          <div class="kwc-slide-left">
+            <content select="figure"></content>
+          </div>
+          <div class="kwc-slide-right">
+            <content select="h3"></content>
+            <content select="p"></content>
+          </div>
+        </div>
+      </template>
+    </div>
+  </template>
+
+  <script src="kwc-slide.js" inline></script>
+</dom-module>

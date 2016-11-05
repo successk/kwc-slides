@@ -1,0 +1,159 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="kwc-slide.html">
+<link rel="import" href="kwc-slide-mask.html">
+
+<dom-module id="kwc-slides">
+  <template>
+    <style>
+      #container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      :host:not(.full-screen) #container {
+        margin: auto;
+      }
+
+      :host.full-screen #container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+
+      :host.hide-actions #container {
+        cursor: none;
+      }
+
+      #slidesContainer {
+        flex-grow: 1;
+        display: flex;
+      }
+
+      #slides {
+        display: flex;
+        margin: auto;
+        flex-direction: column;
+      }
+
+      :host:not(.full-screen) #slides {
+        border: 1px solid #e0e0e0;
+      }
+
+      #slidesContainer:focus {
+        outline: none;
+      }
+
+      #actions {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
+      }
+
+      #actions button {
+        flex-grow: 1;
+      }
+
+      #actions button {
+        border: none;
+        background-color: #eeeeee;
+        cursor: pointer;
+        color: #757575;
+      }
+
+      #actions button:hover:not([disabled]) {
+        color: #424242;
+        background-color: #e0e0e0;
+      }
+
+      #actions button[disabled] {
+        cursor: not-allowed;
+        color: #bdbdbd;
+      }
+
+      :host.hide-actions #actions {
+        display: none;
+      }
+
+      .show-when-fullscreen, :host.full-screen .hide-when-fullscreen {
+        display: none;
+      }
+
+      :host.full-screen .show-when-fullscreen, .hide-when-fullscreen {
+        display: inline;
+      }
+
+      .progress {
+        width: 100%;
+        display: flex;
+      }
+
+      #progress {
+        flex-grow: 1;
+        background-color: #fafafa;
+        border: none;
+      }
+
+      #progress::-webkit-progress-bar {
+        background-color: #fafafa;
+        border: none;
+      }
+
+      #progress::-webkit-progress-value {
+        background-color: #e0e0e0;
+        background-image: -webkit-linear-gradient(-45deg, transparent 25%, rgba(255, 255, 255, 0.3) 25%, rgba(255, 255, 255, 0.3) 50%, transparent 50%, transparent 75%, rgba(255, 255, 255, 0.3) 75%, rgba(255, 255, 255, 0.3));
+        background-image: linear-gradient(-45deg, transparent 25%, rgba(255, 255, 255, 0.3) 25%, rgba(255, 255, 255, 0.3) 50%, transparent 50%, transparent 75%, rgba(255, 255, 255, 0.3) 75%, rgba(255, 255, 255, 0.3));
+        background-size: 25px 25px;
+      }
+
+      #progress::-moz-progress-bar {
+        border: none;
+        background-color: #e0e0e0;
+        background-image: linear-gradient(-45deg, transparent 25%, rgba(255, 255, 255, 0.3) 25%, rgba(255, 255, 255, 0.3) 50%, transparent 50%, transparent 75%, rgba(255, 255, 255, 0.3) 75%, rgba(255, 255, 255, 0.3));
+        background-size: 25px 25px;
+      }
+
+      #inputSlideIndex {
+        border: none;
+        outline: none;
+        text-align: right;
+        width: 3rem;
+      }
+
+      #inputSlideIndex:hover {
+        background-color: #e0e0e0;
+      }
+    </style>
+
+    <div id="container" style$="[[styleContainer]]">
+      <div id="slidesContainer" tabindex="-1" style$="[[styleSlidesContainer]]">
+        <div id="slides" style$="[[styleSlides]]">
+          <content select="kwc-slide-mask[location=top]"></content>
+          <content select="kwc-slide"></content>
+          <content select="kwc-slide-mask[location=bottom]"></content>
+        </div>
+      </div>
+      <div class="progress">
+        <progress id="progress" min="0" max="[[totalSlides]]" value$="[[slideIndex]]"></progress>
+        <span hidden="[[hideSlideNumber]]">
+          <input type="number" min="1" max="[[totalSlides]]" value="[[slideIndex]]" id="inputSlideIndex">
+          / [[totalSlides]]
+        </span>
+      </div>
+      <div id="actions">
+        <button id="previous" title="Previous">◀</button>
+        <button id="related" disabled="[[!partRelated]]" title="Go to related part">⤴</button>
+        <button id="fullscreen" title="Full screen">
+          <span class="hide-when-fullscreen">↗</span>
+          <span class="show-when-fullscreen">↙</span>
+        </button>
+        <button id="next" title="next">▶</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="kwc-slides.js" inline></script>
+</dom-module>
